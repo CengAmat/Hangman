@@ -2,6 +2,7 @@ import { useState } from "react";
 import { clsx } from "clsx";
 import { languages } from "./languages";
 import { getFarewellText, getRandomWord } from "./utils";
+import Confetti from "react-confetti";
 
 /**
  * Backlog:
@@ -11,8 +12,10 @@ import { getFarewellText, getRandomWord } from "./utils";
  * ✅ Fix a11y issues
  * ✅ Choose a random word from a list of words
  * ✅ Make the New Game button reset the game
- * - Reveal what the word was if the user loses the game
+ * ✅ Reveal what the word was if the user loses the game
  * - Confetti drop when the user wins
+ *
+ * Challenge: 🎊🎊🎊🎊🎊
  */
 
 export default function AssemblyEndgame() {
@@ -134,6 +137,7 @@ export default function AssemblyEndgame() {
 
   return (
     <main>
+      {isGameWon && <Confetti recycle={true} numberOfPieces={5000} />}
       <header>
         <h1>Assembly: Endgame</h1>
         <p>
