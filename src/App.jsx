@@ -13,10 +13,6 @@ import { getFarewellText, getRandomWord } from "./utils";
  * ✅ Make the New Game button reset the game
  * - Reveal what the word was if the user loses the game
  * - Confetti drop when the user wins
- *
- * Challenge: Reveal the missing letters of the word if the user
- * loses the game. Style the missing letters to have the same red
- * color as the wrong letter keys.
  */
 
 export default function AssemblyEndgame() {
@@ -66,13 +62,17 @@ export default function AssemblyEndgame() {
     );
   });
 
-  const letterElements = currentWord
-    .split("")
-    .map((letter, index) => (
-      <span key={index}>
-        {guessedLetters.includes(letter) ? letter.toUpperCase() : ""}
+  const letterElements = currentWord.split("").map((letter, index) => {
+    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter);
+    const letterClassName = clsx(
+      isGameLost && !guessedLetters.includes(letter) && "missed-letter"
+    );
+    return (
+      <span key={index} className={letterClassName}>
+        {shouldRevealLetter ? letter.toUpperCase() : ""}
       </span>
-    ));
+    );
+  });
 
   const keyboardElements = alphabet.split("").map((letter) => {
     const isGuessed = guessedLetters.includes(letter);
