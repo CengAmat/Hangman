@@ -12,13 +12,6 @@ import { getFarewellText, getRandomWord } from "./utils";
  * - Choose a random word from a list of words
  * - Make the New Game button reset the game
  * - Confetti drop when the user wins
- *
- * Challenge: Choose a random word from a list of words
- *
- * 1. Create a new function in utils.js that chooses a random
- *    word from the imported array of words and returns it
- * 2. import the function into this file
- * 3. Figure out where to use that function.
  */
 
 export default function AssemblyEndgame() {
