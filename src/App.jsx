@@ -9,9 +9,14 @@ import { getFarewellText, getRandomWord } from "./utils";
  * ✅ Farewell messages in status section
  * ✅ Disable the keyboard when the game is over
  * ✅ Fix a11y issues
- * - Choose a random word from a list of words
- * - Make the New Game button reset the game
+ * ✅ Choose a random word from a list of words
+ * ✅ Make the New Game button reset the game
+ * - Reveal what the word was if the user loses the game
  * - Confetti drop when the user wins
+ *
+ * Challenge: Reveal the missing letters of the word if the user
+ * loses the game. Style the missing letters to have the same red
+ * color as the wrong letter keys.
  */
 
 export default function AssemblyEndgame() {
@@ -40,6 +45,11 @@ export default function AssemblyEndgame() {
     setGuessedLetters((prevLetters) =>
       prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
     );
+  }
+
+  function startNewGame() {
+    setCurrentWord(getRandomWord());
+    setGuessedLetters([]);
   }
 
   const languageElements = languages.map((lang, index) => {
@@ -161,7 +171,11 @@ export default function AssemblyEndgame() {
 
       <section className="keyboard">{keyboardElements}</section>
 
-      {isGameOver && <button className="new-game">New Game</button>}
+      {isGameOver && (
+        <button className="new-game" onClick={startNewGame}>
+          New Game
+        </button>
+      )}
     </main>
   );
 }
